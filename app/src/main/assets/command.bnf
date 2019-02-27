@@ -1,0 +1,6 @@
+#BNF+IAT 1.0 UTF-8;
+!grammar wake;
+!slot <callCmd>;
+!start <callStart>;
+<callStart>:<callCmd>;
+<callCmd>:背升|北盛|背平|北平|备品|腿升|腿伸|腿平|床头升|床头降|床体升|床体降|坐起|躺下;
