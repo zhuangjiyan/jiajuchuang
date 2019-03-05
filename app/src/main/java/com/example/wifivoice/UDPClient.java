@@ -33,10 +33,8 @@ public class UDPClient implements Runnable{
         if(socket == null){
             try {
                 socket = new DatagramSocket(PORT);
-                Log.d(TAG, "suc");
             }catch (SocketException e){
                 e.printStackTrace();
-                Log.d(TAG, "failed");
             }
         }else {
             Log.d(TAG, "not null");

@@ -44,7 +44,7 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
     private static final String TAG = "MainActivity";
 
     private Button back_up, back_down, leg_up, leg_down, both_up, both_down, whole_up, whole_down, head_up, head_down;
@@ -110,16 +110,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        back_up.setOnClickListener(MainActivity.this);
-        back_down.setOnClickListener(MainActivity.this);
-        leg_up.setOnClickListener(MainActivity.this);
-        leg_down.setOnClickListener(MainActivity.this);
-        both_up.setOnClickListener(MainActivity.this);
-        both_down.setOnClickListener(MainActivity.this);
-        whole_up.setOnClickListener(MainActivity.this);
-        whole_down.setOnClickListener(MainActivity.this);
-        head_up.setOnClickListener(MainActivity.this);
-        head_down.setOnClickListener(MainActivity.this);
+        back_up.setOnTouchListener(MainActivity.this);
+        back_down.setOnTouchListener(MainActivity.this);
+        leg_up.setOnTouchListener(MainActivity.this);
+        leg_down.setOnTouchListener(MainActivity.this);
+        both_up.setOnTouchListener(MainActivity.this);
+        both_down.setOnTouchListener(MainActivity.this);
+        whole_up.setOnTouchListener(MainActivity.this);
+        whole_down.setOnTouchListener(MainActivity.this);
+        head_up.setOnTouchListener(MainActivity.this);
+        head_down.setOnTouchListener(MainActivity.this);
     }
 
     private void initWake() {
@@ -148,414 +148,415 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        if(sended){
-            udpClient.send_data(STOP_VALUE);
-            Log.d(TAG,"stop");
-            sended = false;
-            return;
-        }
-        switch (v.getId()){
-            case R.id.back_up:
-                count1 ++;
-                if(count1 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count1 == 1){
-                                count1 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count1 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(BACK_UP);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count1 = 0;
-                    }else {
-                        count1 = 0;
-                    }
-                }
-                break;
-            case R.id.back_down:
-                count2 ++;
-                if(count2 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count2 == 1){
-                                count2 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count2 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(BACK_DOWN);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count2 = 0;
-                    }else {
-                        count2 = 0;
-                    }
-                }
-                break;
-            case R.id.leg_up:
-                count3 ++;
-                if(count3 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count3 == 1){
-                                count3 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count3 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(LEG_UP);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count3 = 0;
-                    }else {
-                        count3 = 0;
-                    }
-                }
-                break;
-            case R.id.leg_down:
-                count4 ++;
-                if(count4 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count4 == 1){
-                                count4 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count4 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(LEG_DOWN);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count4 = 0;
-                    }else {
-                        count4 = 0;
-                    }
-                }
-                break;
-            case R.id.both_up:
-                count5 ++;
-                if(count5 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count5 == 1){
-                                count5 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count5 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(BOTH_UP);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count5 = 0;
-                    }else {
-                        count5 = 0;
-                    }
-                }
-                break;
-            case R.id.both_down:
-                count6 ++;
-                if(count6 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count6 == 1){
-                                count6 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count6 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(BOTH_DOWN);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count6 = 0;
-                    }else {
-                        count6 = 0;
-                    }
-                }
-                break;
-            case R.id.whole_up:
-                count7 ++;
-                if(count7 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count7 == 1){
-                                count7 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count7 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(WHOLE_UP);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count7 = 0;
-                    }else {
-                        count7 = 0;
-                    }
-                }
-                break;
-            case R.id.whole_down:
-                count8 ++;
-                if(count8 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count8 == 1){
-                                count8 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count8 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(WHOLE_DOWN);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count8 = 0;
-                    }else {
-                        count8 = 0;
-                    }
-                }
-                break;
-            case R.id.head_up:
-                count9 ++;
-                if(count9 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count9 == 1){
-                                count9 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count9 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(HEAD_UP);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count9 = 0;
-                    }else {
-                        count9 = 0;
-                    }
-                }
-                break;
-            case R.id.head_down:
-                count10 ++;
-                if(count10 == 1){
-                    oldHit = SystemClock.uptimeMillis();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(TIME_UNIT);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            if(count10 == 1){
-                                count10 = 0;
-                            }
-                        }
-                    }).start();
-                }else if(count10 == 2){
-                    newHit = SystemClock.uptimeMillis();
-                    if(newHit - oldHit < TIME_UNIT){
-                        udpClient.send_data(HEAD_DOWN);
-                        sended = true;
-                        Log.d(TAG, "hit");
-                        count10 = 0;
-                    }else {
-                        count10 = 0;
-                    }
-                }
-                break;
-        }
-    }
-
-    //    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
+//    @Override
+//    public void onClick(View v) {
+//        if(sended){
+//            udpClient.send_data(STOP_VALUE);
+//            Log.d(TAG,"stop");
+//            sended = false;
+//            return;
+//        }
 //        switch (v.getId()){
 //            case R.id.back_up:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count1 ++;
+//                if(count1 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count1 == 1){
+//                                count1 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count1 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(BACK_UP);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count1 = 0;
+//                    }else {
+//                        count1 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.back_down:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count2 ++;
+//                if(count2 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count2 == 1){
+//                                count2 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count2 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(BACK_DOWN);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count2 = 0;
+//                    }else {
+//                        count2 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.leg_up:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count3 ++;
+//                if(count3 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count3 == 1){
+//                                count3 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count3 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(LEG_UP);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count3 = 0;
+//                    }else {
+//                        count3 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.leg_down:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count4 ++;
+//                if(count4 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count4 == 1){
+//                                count4 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count4 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(LEG_DOWN);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count4 = 0;
+//                    }else {
+//                        count4 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.both_up:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count5 ++;
+//                if(count5 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count5 == 1){
+//                                count5 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count5 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(BOTH_UP);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count5 = 0;
+//                    }else {
+//                        count5 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.both_down:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count6 ++;
+//                if(count6 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count6 == 1){
+//                                count6 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count6 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(BOTH_DOWN);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count6 = 0;
+//                    }else {
+//                        count6 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.whole_up:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count7 ++;
+//                if(count7 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count7 == 1){
+//                                count7 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count7 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(WHOLE_UP);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count7 = 0;
+//                    }else {
+//                        count7 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.whole_down:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count8 ++;
+//                if(count8 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count8 == 1){
+//                                count8 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count8 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(WHOLE_DOWN);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count8 = 0;
+//                    }else {
+//                        count8 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.head_up:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count9 ++;
+//                if(count9 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count9 == 1){
+//                                count9 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count9 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(HEAD_UP);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count9 = 0;
+//                    }else {
+//                        count9 = 0;
+//                    }
 //                }
 //                break;
 //            case R.id.head_down:
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
+//                count10 ++;
+//                if(count10 == 1){
+//                    oldHit = SystemClock.uptimeMillis();
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(TIME_UNIT);
+//                            }catch (InterruptedException e){
+//                                e.printStackTrace();
+//                            }
+//                            if(count10 == 1){
+//                                count10 = 0;
+//                            }
+//                        }
+//                    }).start();
+//                }else if(count10 == 2){
+//                    newHit = SystemClock.uptimeMillis();
+//                    if(newHit - oldHit < TIME_UNIT){
 //                        udpClient.send_data(HEAD_DOWN);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        udpClient.send_data(STOP_VALUE);
-//                        break;
+//                        sended = true;
+//                        Log.d(TAG, "hit");
+//                        count10 = 0;
+//                    }else {
+//                        count10 = 0;
+//                    }
 //                }
 //                break;
 //        }
-//        return false;
 //    }
+
+        @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (v.getId()){
+            case R.id.back_up:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(BACK_UP);
+                        Log.d(TAG,"s");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.back_down:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(BACK_DOWN);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.leg_up:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(LEG_UP);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.leg_down:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(LEG_DOWN);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.both_up:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(BOTH_UP);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.both_down:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(BOTH_DOWN);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.whole_up:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(WHOLE_UP);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.whole_down:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(WHOLE_DOWN);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.head_up:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(HEAD_UP);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+            case R.id.head_down:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        udpClient.send_data(HEAD_DOWN);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        udpClient.send_data(STOP_VALUE);
+                        break;
+                }
+                break;
+        }
+        return false;
+    }
 
     private WakeuperListener mWakeuperListener = new WakeuperListener() {
         @Override
