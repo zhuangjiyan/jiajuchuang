@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <TextView
@@ -29,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="语音唤醒阈值："
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            />
 
         <SeekBar
             android:id="@+id/thresh"
@@ -43,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <TextView
@@ -140,7 +143,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="重置"
+            android:text="连接"
             android:textSize="18sp"/>
 
         <View

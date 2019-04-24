@@ -108,8 +108,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         head_down = findViewById(R.id.head_down);
 
         toolbar = findViewById(R.id.toolbar);
-
+        toolbar.setLogo(R.mipmap.ic_launcher);
+        toolbar.setTitle("慧明智能居家护理床");
         setSupportActionBar(toolbar);
+
         back_up.setOnTouchListener(MainActivity.this);
         back_down.setOnTouchListener(MainActivity.this);
         leg_up.setOnTouchListener(MainActivity.this);

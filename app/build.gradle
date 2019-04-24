@@ -20,7 +20,7 @@ android {
 
 android.applicationVariants.all { variant ->
     variant.outputs.all {
-        outputFileName = "家用床pad控制.apk"
+        outputFileName = "慧明智能居家护理床.apk"
     }
 }
 

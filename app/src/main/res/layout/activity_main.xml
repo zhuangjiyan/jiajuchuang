@@ -14,32 +14,27 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/back_up"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="背部升起"
+                    android:background="@drawable/bu"
                     android:gravity="bottom|center"
                     android:paddingBottom="10dp"
-                    android:textSize="20sp"
-                    android:background="@drawable/bu" />
+                    android:text="背部升起"
+                    android:textSize="20sp" />
 
                 <View
                     android:layout_width="5dp"
@@ -61,9 +56,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="10dp">
 
                 <Button
@@ -96,9 +90,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="10dp">
 
                 <Button
@@ -131,9 +124,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="10dp">
 
                 <Button
@@ -166,9 +158,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="10dp">
 
                 <Button
@@ -199,7 +190,5 @@
             </LinearLayout>
 
         </LinearLayout>
-
-    </ScrollView>
 
 </LinearLayout>

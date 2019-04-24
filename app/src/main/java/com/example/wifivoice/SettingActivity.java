@@ -66,6 +66,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private String ssid;
     private Boolean RE_STATE = false;
 
+    private int reLink;
     private String threshStr = "语音唤醒阈值：";
     private String threshStr1 = "语音识别阈值：";
     private int curThresh;
@@ -74,6 +75,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private static final int MIN_ = 65;
     private static final int MAX = 60;
     private static final int MIN = -20;
+    private static final byte[] RST_VALUE = {0x52,0x53,0x54};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +138,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         RE_STATE = pref.getBoolean("RE_STATE", false);
         if(!RE_STATE){
-            re_.setText("重置");
+            re_.setText("连接");
         }else {
             re_.setText("连接");
         }
@@ -214,8 +216,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.re_:
                 progress_bar.setVisibility(View.VISIBLE);
-                if(!RE_STATE) {
-                    re_.setText("重置中");
+                reLink = 1;
+                if(password_.length() != 0) {
+                    re_.setText("重新设置中");
                     send();
                 }else {
                     re_.setText("连接中");
@@ -259,6 +262,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
+        reLink = 3;
         editor = pref.edit();
         if(remrmber_user.isChecked()){
             editor.putBoolean("remember_user", true);
@@ -369,19 +373,25 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             switch (msg.what){
                 case 1:
                     progress_bar.setVisibility(View.GONE);
-                    Toast.makeText(SettingActivity.this, "连接超时，请检查网络", Toast.LENGTH_SHORT).show();
-                    re_.setText("重置");
+                    Toast.makeText(SettingActivity.this, "设置超时，请确认连接安信可网络", Toast.LENGTH_SHORT).show();
+                    re_.setText("连接");
                     break;
                 case 2:
-                    Toast.makeText(SettingActivity.this, "重置成功, 开始连接", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, "设置成功, 开始连接", Toast.LENGTH_SHORT).show();
                     RE_STATE = true;
                     Get_IP();
                     re_.setText("连接中");
                     break;
                 case 3:
-                    progress_bar.setVisibility(View.GONE);
-                    Toast.makeText(SettingActivity.this, "连接超时，请检查网络", Toast.LENGTH_SHORT).show();
-                    re_.setText("重新连接");
+                    if (reLink < 3){
+                        Toast.makeText(SettingActivity.this, "连接超时，正在重连第"+ reLink +"次", Toast.LENGTH_SHORT).show();
+                        Get_IP();
+                        reLink++;
+                    }else {
+                        Toast.makeText(SettingActivity.this, "连接失败，请检查网络", Toast.LENGTH_SHORT).show();
+                        re_.setText("连接");
+                        progress_bar.setVisibility(View.GONE);
+                    }
                     break;
                 case 4:
                     if(IP.equals("0.0.0.0")){
@@ -391,8 +401,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                         editor.putString("IP", IP);
                         editor.apply();
                         progress_bar.setVisibility(View.GONE);
-                        Toast.makeText(SettingActivity.this, "成功连接: " + IP, Toast.LENGTH_SHORT).show();
-                        re_.setText("重置");
+                        Toast.makeText(SettingActivity.this, "已成功连接" , Toast.LENGTH_LONG).show();
+                        re_.setText("连接");
                         RE_STATE = false;
                     }
                     break;

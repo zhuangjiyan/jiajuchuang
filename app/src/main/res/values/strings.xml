@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">家居床</string>
+    <string name="app_name">慧明智能居家护理床</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_pronouncement">PronouncementActivity</string>
     <string name="title_activity_asr">AsrActivity</string>
+    <string name="help">1.确定开放所有权限后，连接安信可网络<br/>2.扫描获取当前wifi名称后填入密码进行连接，待出现连接成功提示后即可使用<br/>3.过程中请保证连接安信可网络，如果断连请重试<br/>
+    </string>
 </resources>
